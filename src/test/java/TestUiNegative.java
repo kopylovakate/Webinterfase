@@ -38,7 +38,7 @@ public class TestUiNegative {
     }
 
     @Test
-    void test1() {
+    public void shouldBeFailedEmptyNameInput() {
         driver.findElement(By.cssSelector("[data-test-id = name] input")).clear();
         driver.findElement(By.cssSelector("[data-test-id = phone] input")).sendKeys("+79156471826");
         driver.findElement(By.cssSelector("[data-test-id = agreement]")).click();
@@ -49,7 +49,7 @@ public class TestUiNegative {
     }
 
     @Test
-    void test2() {
+    public void shouldBeFailedLongNumberInput() {
         driver.findElement(By.cssSelector("[data-test-id = name] input")).sendKeys("Пак Иван");
         driver.findElement(By.cssSelector("[data-test-id = phone] input")).sendKeys("+791564718267777");
         driver.findElement(By.cssSelector("[data-test-id = agreement]")).click();
@@ -60,7 +60,7 @@ public class TestUiNegative {
     }
 
     @Test
-    void test3() {
+    public void shouldBeFailedEmptyNumberInput() {
         driver.findElement(By.cssSelector("[data-test-id = name] input")).sendKeys("Пак Иван");
         driver.findElement(By.cssSelector("[data-test-id = phone] input")).clear();
         driver.findElement(By.cssSelector("[data-test-id = agreement]")).click();
@@ -71,7 +71,7 @@ public class TestUiNegative {
     }
 
     @Test
-    void test4() {
+   public void shouldBeFailedCorrectDataInput() {
         driver.findElement(By.cssSelector("[data-test-id = name] input")).sendKeys("Пак Иван");
         driver.findElement(By.cssSelector("[data-test-id = phone] input")).sendKeys("+79156471826");
         driver.findElement(By.className("button")).click();
@@ -79,12 +79,12 @@ public class TestUiNegative {
         assertTrue(actual);
     }
     @Test
-    void test5() {
+    public void shouldBeFailedIncorrectNameInput () {
         driver.findElement(By.cssSelector("[data-test-id = name] input")).sendKeys("Mr Big 44&");
         driver.findElement(By.cssSelector("[data-test-id = phone] input")).sendKeys("+79998883456");
         driver.findElement(By.cssSelector("[data-test-id = agreement]")).click();
         driver.findElement(By.className("button")).click();
-        String expected = "Имя и Фамилия указаные неверно. Допустимы только русские буквы, пробелы и дефисы.".trim();
+        String expected = "Имя и Фамилия указаны неверно. Допустимы только русские буквы, пробелы и дефисы.".trim();
         String actual = driver.findElement(By.cssSelector("[data-test-id = name].input_invalid .input__sub")).getText().trim();
         assertEquals(expected, actual);
     }
