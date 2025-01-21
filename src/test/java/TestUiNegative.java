@@ -39,13 +39,12 @@ public class TestUiNegative {
 
     @Test
     public void shouldBeFailedEmptyNameInput() {
-        driver.findElement(By.cssSelector("[data-test-id = name] input")).clear();
         driver.findElement(By.cssSelector("[data-test-id = phone] input")).sendKeys("+79156471826");
         driver.findElement(By.cssSelector("[data-test-id = agreement]")).click();
-        driver.findElement(By.className("button")).click();
-        String expected = "Поле обязательно для заполнения";
-        String actual = driver.findElement(By.cssSelector("[data-test-id = name].input_invalid .input__sub")).getText().trim();
-        assertEquals(expected, actual);
+        driver.findElement(By.cssSelector(".button")).click();
+        assertEquals("Поле обязательно для заполнения",
+                driver.findElement(By.cssSelector("[data-test-id = 'name'].input_invalid .input__sub")).getText().trim());
+        assertTrue(driver.findElement(By.cssSelector("[data-test-id = 'name'].input_invalid.input__sub")).isDisplayed());
     }
 
     @Test
